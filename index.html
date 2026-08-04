@@ -3,225 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قوانين سيرفر Lion RP الرسمية</title>
+    <title>LEON RP - التقديم</title>
     <style>
-        :root {
-            --primary-red: #e50914;
-            --accent-blue: #00d2ff;
-            --dark-bg: #0f0f13;
-            --card-bg: #1a1a24;
-            --text-color: #f1f1f1;
-            --text-secondary: #a0a0b0;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            line-height: 1.8;
-        }
-
-        header {
-            background: linear-gradient(135deg, rgba(229, 9, 20, 0.2), rgba(0, 212, 255, 0.2));
-            text-align: center;
-            padding: 40px 20px;
-            border-bottom: 2px solid var(--primary-red);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
-        }
-
-        header p {
-            color: var(--accent-blue);
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            color: var(--accent-blue);
-            border-bottom: 2px solid #222;
-            padding-bottom: 5px;
-            margin-top: 35px;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        .rule-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 20px 25px;
-            margin-bottom: 20px;
-            border-right: 4px solid var(--accent-blue);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s ease;
-        }
-
-        .rule-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .rule-card.important {
-            border-right-color: var(--primary-red);
-        }
-
-        .rule-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
-        }
-
-        .rule-title.red { color: var(--primary-red); }
-        .rule-title.blue { color: var(--accent-blue); }
-
-        .rule-desc {
-            color: var(--text-secondary);
-            font-size: 0.98rem;
-        }
-
-        ul {
-            margin: 10px 0 0 0;
-            padding-right: 20px;
-        }
-
-        ul li {
-            margin-bottom: 8px;
-        }
-
-        footer {
-            text-align: center;
+            min-height: 100vh;
+            margin: 0;
             padding: 20px;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            border-top: 1px solid #222;
-            margin-top: 40px;
+        }
+        .form-container {
+            background-color: #181818;
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            padding: 25px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            text-align: center;
+            color: #d4af37;
+            margin-bottom: 5px;
+        }
+        p.sub {
+            text-align: center;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            color: #d4af37;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            background-color: #252525;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 25px;
+            background-color: #1e7e34;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #555;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>🦁 قوانين سيرفر LION RP</h1>
-        <p>اللوائح والقوانين الرسمية المعتمدة لجميع اللاعبين داخل المدينة</p>
-    </header>
+<div class="form-container">
+    <h2>LEON RP - التقديم</h2>
+    <p class="sub">قم بملء البيانات التالية بدقة لتقييم طلبك</p>
 
-    <div class="container">
+    <form id="applyForm">
+        <label>الاسم الحقيقي:</label>
+        <input type="text" id="name" required placeholder="أدخل اسمك الحقيقي">
 
-        <!-- 1. المفاهيم الأساسية -->
-        <h2 class="section-title">🎭 مفاهيم الرول بلاي الأساسية</h2>
+        <label>العمر:</label>
+        <input type="number" id="age" required placeholder="أدخل عمرك">
 
-        <div class="rule-card important">
-            <div class="rule-title red">👤 مفهوم الرول بلاي (Roleplay)</div>
-            <div class="rule-desc">العيش وتقمص شخصية افتراضية داخل المدينة والتعامل بواقعية تامة، وتفادي الخروج عن نبرة وشخصية اللعبة أثناء التواجد في السيرفر.</div>
-        </div>
+        <label>اسمك في ديسكورد (Discord Username):</label>
+        <input type="text" id="discord" required placeholder="مثال: user_123">
 
-        <div class="rule-card">
-            <div class="rule-title blue">😨 Fear RP (تقدير وتثمين الحياة)</div>
-            <div class="rule-desc">يجب الخوف على حياة شخصيتك في حال وجود تهديد مباشر أو سلاح موجه عليك، والانصياع لأوامر الطرف المعتدي لحماية حياتك.</div>
-        </div>
+        <label>اسم الشخصية داخل اللعبة (In-Game Character Name):</label>
+        <input type="text" id="ingameName" required placeholder="مثال: Jack Spencer">
 
-        <div class="rule-card">
-            <div class="rule-title blue">🎭 Fail RP (تخريب الرول بلاي)</div>
-            <div class="rule-desc">القيام بأفعال منافية للواقعية (مثل القيادة بسرعة بعد حادث عنيف، القفز من مباني عالية، أو التحدث بعد فقدان الوعي).</div>
-        </div>
+        <label>قصة الشخصية (Backstory):</label>
+        <textarea id="story" rows="4" required placeholder="اكتب قصة شخصيتك باختصار..."></textarea>
 
-        <div class="rule-card">
-            <div class="rule-title blue">🧠 Metagaming (الميتا جيمنج)</div>
-            <div class="rule-desc">استخدام معلومات خارج نطاق اللعبة (من البثوث، الديسكورد، أو الهمس) واستغلالها لصالح شخصيتك داخل المدينة.</div>
-        </div>
+        <label>لماذا انضممت إلينا؟</label>
+        <textarea id="reason" rows="3" required placeholder="سبب انضمامك للسيرفر..."></textarea>
 
-        <div class="rule-card">
-            <div class="rule-title blue">💀 NLR (New Life Rule - حياة جديدة)</div>
-            <div class="rule-desc">عند فقدان الوعي ونقلك للمستشفى، تبدأ حياة جديدة وتنسى السيناريو والمكان والشخص المتسبب في موتك، ويمنع العودة للمكان إلا بعد مرور 15 دقيقة.</div>
-        </div>
+        <button type="submit" id="submitBtn">إرسال الطلب</button>
+    </form>
+</div>
 
-        <div class="rule-card">
-            <div class="rule-title blue">💪 Powergaming (القوة الفائقة)</div>
-            <div class="rule-desc">إجبار اللاعبين على سيناريو دون إعطائهم فرصة للرد، أو ادعاء قدرات غير واقعية لا تملكها شخصيتك.</div>
-        </div>
+<script>
+    const form = document.getElementById('applyForm');
+    const submitBtn = document.getElementById('submitBtn');
 
-        <!-- 2. المخالفات المباشرة -->
-        <h2 class="section-title">💥 المخالفات المباشرة والقتال</h2>
+    // رابط الـ Webhook الخاص بك
+    const webhookUrl = "https://discord.com/api/webhooks/1534030878575951933/-OMrFp-xu01ZeWKVXFNLbLM8YqXPz6Hls4Eshs5mFM7WiIqPhFuZQrdUPQfsypfZA-jG";
 
-        <div class="rule-card important">
-            <div class="rule-title red">💥 RDM (Random Deathmatch)</div>
-            <div class="rule-desc">يمنع قتل أو ضرب أي شخص دون وجود سبب سيناريو رول بلاي واضح ومسبق.</div>
-        </div>
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-        <div class="rule-card important">
-            <div class="rule-title red">🚗 VDM (Vehicle Deathmatch)</div>
-            <div class="rule-desc">يمنع منعاً باتاً استخدام المركبات كـسلاح لدهس أو صدم اللاعبين عمداً.</div>
-        </div>
+        submitBtn.disabled = true;
+        submitBtn.innerText = "جاري الإرسال...";
 
-        <div class="rule-card">
-            <div class="rule-title blue">Combat Logging (الهروب من السيناريو)</div>
-            <div class="rule-desc">يمنع الخروج من السيرفر أو إغلاق اللعبة أثناء سيناريو جاري (مثل مطاردة، عملية سرقة، أو تحقيق شرطة).</div>
-        </div>
+        const name = document.getElementById('name').value;
+        const age = document.getElementById('age').value;
+        const discord = document.getElementById('discord').value;
+        const ingameName = document.getElementById('ingameName').value;
+        const story = document.getElementById('story').value;
+        const reason = document.getElementById('reason').value;
 
-        <!-- 3. الأوامر والصوت -->
-        <h2 class="section-title">💬 الشات والأوامر (/me & /do)</h2>
+        const payload = {
+            embeds: [{
+                title: "📝 طلب تقديم جديد - LEON RP",
+                color: 13808727,
+                fields: [
+                    { name: "الاسم الحقيقي", value: name, inline: true },
+                    { name: "العمر", value: age, inline: true },
+                    { name: "حساب الديسكورد", value: discord, inline: false },
+                    { name: "اسم الشخصية باللعبة", value: ingameName, inline: false },
+                    { name: "قصة الشخصية (Backstory)", value: story, inline: false },
+                    { name: "سبب الانضمام", value: reason, inline: false }
+                ],
+                footer: { text: "نظام التقديم الآلي" },
+                timestamp: new Date()
+            }]
+        };
 
-        <div class="rule-card important">
-            <div class="rule-title red">📜 استخدام /me و /do و OOC</div>
-            <div class="rule-desc">
-                <ul>
-                    <li><b>أمر /me:</b> للتعبير عن الأفعال التي لا تملك أنيميشن (مثل: <i>/me يفحص جرح الشخص</i>).</li>
-                    <li><b>أمر /do:</b> لتقصي الحقائق ويجب الإجابة فيه بصدق تلم (مثل: <i>/do هل توجد بصمات؟</i>).</li>
-                    <li><b>شات OOC:</b> يمنع مناقشة أمور خارج اللعبة في الصوت العام، ويُمنع توجيه الإهانات أو التحدث عن القرارات الإدارية.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 4. المناطق الآمنة -->
-        <h2 class="section-title">🛡️ المناطق الآمنة (Safe Zones)</h2>
-
-        <div class="rule-card">
-            <div class="rule-title blue">🛡️ أماكن الحماية العامة</div>
-            <div class="rule-desc">
-                يمنع ممارسة أي نشاط إجرامي (قتل، خطف، سرقة، أو افتعال مشاكل) في المناطق التالية:
-                <ul>
-                    <li>🔧 <b>الورش ومحطات الصيانة ومراكز التعديل.</b></li>
-                    <li>🏥 <b>المستشفيات والمراكز الطبية.</b></li>
-                    <li>👮 <b>مراكز الشرطة، السجون، والمقرات الحكومية.</b></li>
-                    <li>🏎️ <b>معارض السيارات ومناطق الرسبون العامة ومحلات الملابس.</b></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 5. قوانين السرقات والخطف -->
-        <h2 class="section-title">🔫 قوانين الخطف والسرقات والقتال الإجرامي</h2>
-
-        <div class="rule-card">
-            <div class="rule-title blue">💰 السرقات والرهائن</div>
-            <div class="rule-desc">
-                <ul>
-                    <li>يجب توفر العدد المطلوب من رجال الشرطة أونلاين في المدينة قبل البدء بأي عملية سرقة كبرى (بنوك، محلات).</li>
-                    <li>يمنع خطف موظفي الخدمات الميدانية (أطباء وميكانيكيين) أثناء تأدية واجبهم.</li>
-                    <li>يمنع طلب مبالغ تعجيزية كفدية للرهائن، ويجب إعطاء الشرطة مهلة للتفاوض.</li>
-                    <li>يمنع الاتفاق الوهمي مع الرهينة (الرهينة المزيفة).</li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-
-    <footer>
-        <p>جميع الحقوق محفوظة لسيرفر Lion RP © 2026</p>
-    </footer>
+        fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("تم إرسال طلبك بنجاح! ✅");
+                form.reset();
+            } else {
+                alert("حدث خطأ أثناء الإرسال، تأكد من صحة الرابط أو حاول لاحقاً. ❌");
+            }
+        })
+        .catch(error => {
+            alert("حدث خطأ في الاتصال! ❌");
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "إرسال الطلب";
+        });
+    });
+</script>
 
 </body>
 </html>
