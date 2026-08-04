@@ -1,197 +1,191 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lion RP Rules</title>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #e2e8f0;
-        background-color: #0d0f12;
-        line-height: 1.6;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قوانين سيرفر Lion RP الرسمية</title>
+    <style>
+        :root {
+            --primary-red: #e50914;
+            --accent-blue: #00d2ff;
+            --dark-bg: #0f0f13;
+            --card-bg: #1a1a24;
+            --text-color: #f1f1f1;
+            --text-secondary: #a0a0b0;
+        }
 
-    /* Header Banner */
-    .header {
-        background: linear-gradient(135deg, #1a0f00 0%, #3a1d00 50%, #0d0f12 100%);
-        padding: 40px 20px;
-        text-align: center;
-        border-bottom: 3px solid #d97706;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
 
-    .lion-badge {
-        width: 90px;
-        height: 90px;
-        margin: 0 auto 15px auto;
-        background: linear-gradient(145deg, #d97706, #b45309);
-        border-radius: 50%;
-        padding: 15px;
-        box-shadow: 0 0 25px rgba(217, 119, 6, 0.4);
-        border: 2px solid #fef3c7;
-    }
+        header {
+            background: linear-gradient(135deg, rgba(229, 9, 20, 0.2), rgba(0, 212, 255, 0.2));
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 2px solid var(--primary-red);
+        }
 
-    .lion-badge svg {
-        width: 100%;
-        height: 100%;
-        fill: #ffffff;
-    }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+        }
 
-    .server-title {
-        font-size: 28px;
-        font-weight: 900;
-        color: #ffffff;
-        margin: 0;
-        text-transform: uppercase;
-    }
+        header p {
+            color: var(--accent-blue);
+            font-weight: bold;
+            margin-top: 10px;
+        }
 
-    .server-title span { color: #f59e0b; }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
 
-    .server-subtitle {
-        font-size: 16px;
-        color: #fbbf24;
-        margin-top: 5px;
-        font-weight: bold;
-    }
+        .rule-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px 25px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--accent-blue);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease;
+        }
 
-    .container { padding: 25px 20px; max-width: 800px; margin: auto; }
+        .rule-card:hover {
+            transform: translateY(-3px);
+        }
 
-    .intro-box {
-        background-color: rgba(217, 119, 6, 0.1);
-        border-right: 4px solid #f59e0b;
-        padding: 12px 15px;
-        border-radius: 6px;
-        margin-bottom: 25px;
-        color: #fef3c7;
-    }
+        .rule-card.important {
+            border-right-color: var(--primary-red);
+        }
 
-    .section-title {
-        font-size: 18px;
-        color: #ffffff;
-        background: linear-gradient(90deg, #b45309 0%, #1e293b 100%);
-        padding: 8px 16px;
-        border-radius: 6px;
-        margin-top: 25px;
-        margin-bottom: 15px;
-        font-weight: bold;
-        border-right: 4px solid #fbbf24;
-    }
+        .rule-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    .rule-card {
-        background-color: #161b22;
-        border: 1px solid #262d3d;
-        border-radius: 8px;
-        padding: 14px 18px;
-        margin-bottom: 12px;
-    }
+        .rule-title.red { color: var(--primary-red); }
+        .rule-title.blue { color: var(--accent-blue); }
 
-    .rule-title {
-        font-size: 16px;
-        font-weight: bold;
-        color: #f59e0b;
-        margin-bottom: 6px;
-    }
+        .rule-desc {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+        }
 
-    .rule-desc {
-        font-size: 14px;
-        color: #cbd5e1;
-        margin: 0;
-    }
+        ul {
+            margin: 10px 0 0 0;
+            padding-right: 20px;
+        }
 
-    .tag {
-        background-color: #3b2005;
-        color: #fbbf24;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 12px;
-        font-weight: bold;
-        border: 1px solid #78350f;
-    }
+        ul li {
+            margin-bottom: 8px;
+        }
 
-    .footer {
-        text-align: center;
-        padding: 20px;
-        font-size: 13px;
-        color: #64748b;
-        border-top: 1px solid #1e293b;
-        margin-top: 30px;
-    }
-</style>
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="lion-badge">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 11v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-            </svg>
-        </div>
-        <h1 class="server-title">LION <span>ROLEPLAY</span></h1>
-        <div class="server-subtitle">🦁 اللائحة العامة لقوانين السيرفر 🦁</div>
-    </div>
+    <header>
+        <h1>🦁 قوانين سيرفر LION RP</h1>
+        <p>الرجاء الالتزام التام بالقوانين لضمان أفضل تجربة رول بلاي للجميع</p>
+    </header>
 
     <div class="container">
-        <div class="intro-box">
-            ⚠️ <strong>تنبيه هام:</strong> دخولك إلى السيرفر يعني موافقتك الكاملة على جميع القوانين. عدم علمك بالقوانين لا يعفيك من العقوبة أو الباند نهائياً.
+
+        <!-- القوانين الأساسية -->
+        <div class="rule-card important">
+            <div class="rule-title red">💥 RDM (Random Deathmatch)</div>
+            <div class="rule-desc">يمنع منعاً باتاً قتل أي لاعب أو إلحاق الضرر به دون وجود سبب سيناريو رول بلاي قوي ومسبق.</div>
         </div>
 
-        <div class="section-title">1. القوانين الأساسية والمصطلحات</div>
-        
-        <div class="rule-card">
-            <div class="rule-title"><span class="tag">VDM</span> Vehicle Deathmatch</div>
-            <p class="rule-desc">يمنع استخدام المركبات كأداة لدهس أو قتل اللاعبين بدون سبب داهم وسياق رول بلاي قوي.</p>
-        </div>
-
-        <div class="rule-card">
-            <div class="rule-title"><span class="tag">RDM</span> Random Deathmatch</div>
-            <p class="rule-desc">يمنع القتل أو إطلاق النار على أي لاعب دون وجود سيناريو مسبق وسبب منطقي يبرر العملية.</p>
+        <div class="rule-card important">
+            <div class="rule-title red">🚗 VDM (Vehicle Deathmatch)</div>
+            <div class="rule-desc">يمنع استخدام المركبات كـسلاح لدهس أو قتل اللاعبين عمداً.</div>
         </div>
 
         <div class="rule-card">
-            <div class="rule-title"><span class="tag">Fear RP</span> الخوف على الحياة</div>
-            <p class="rule-desc">يجب عليك إظهار الخوف التام على حياة شخصيتك عند رفع السلاح عليك وإطاعة الأوامر.</p>
+            <div class="rule-title blue">😨 Fear RP (تقدير الحياة)</div>
+            <div class="rule-desc">يجب عليك تقدير حياة شخصيتك في كل الأوقات. إذا كان هناك سلاح موجه نحوك أو تهديد مباشر، يجب عليك الاستسلام وتطبيق أوامر المعتدي.</div>
         </div>
 
         <div class="rule-card">
-            <div class="rule-title"><span class="tag">Fail RP</span> التمثيل غير الواقعي</div>
-            <p class="rule-desc">يمنع القيام بتصرفات غير منطقية مثل القيادة بسيارة مدمّرة بالكامل وكأن شيئاً لم يكن.</p>
+            <div class="rule-title blue">🎭 Fail RP (تخريب الرول بلاي)</div>
+            <div class="rule-desc">يمنع القيام بأفعال غير واقعية أو لا يمكن حدوثها في الحياة الواقعية (مثل القفز بالسيارة من المرتفعات دون التأثر).</div>
         </div>
 
         <div class="rule-card">
-            <div class="rule-title"><span class="tag">NLR</span> قانون الحياة الجديدة</div>
-            <p class="rule-desc">عند وفاتك وإعادة إنعاشك في المستشفى، تُنسى تماماً جميع أحداث السيناريو السابق ولا يحق لك الانتقام.</p>
-        </div>
-
-        <div class="section-title">2. المناطق الآمنة (Safe Zones)</div>
-        
-        <div class="rule-card">
-            <div class="rule-title">🏥 المستشفيات والقطاع الطبي</div>
-            <p class="rule-desc">يمنع ممارسة أي نشاط إجرامي أو الاعتداء على الكوادر الطبية أثناء تأدية واجبهم.</p>
+            <div class="rule-title blue">🧠 Metagaming (الميتا جيمنج)</div>
+            <div class="rule-desc">يمنع استخدام أي معلومات أخذتها خارج اللعبة (مثل البثوث، الديسكورد، أو الهمس) واستخدامها داخل الرول بلاي مع شخصيتك.</div>
         </div>
 
         <div class="rule-card">
-            <div class="rule-title">👮‍♂️ مراكز الشرطة</div>
-            <p class="rule-desc">منطقة آمنة يمنع فيها إطلاق النار أو تصفية الحسابات والاعتداء على رجال الأمن داخل المقر.</p>
+            <div class="rule-title blue">💀 NLR (New Life Rule)</div>
+            <div class="rule-desc">عندما تفقد الوعي وتنتقل للمستشفى، تنسى كل الأحداث والسيناريو الذي أدى لموتك، ولا يحق لك العودة لنفس مكان السيناريو لمدة 15 دقيقة.</div>
         </div>
 
-        <div class="section-title">3. الجرائم والسطو</div>
-        
+        <!-- قسم الإميتة وقوانين الصوت -->
+        <div class="rule-card important">
+            <div class="rule-title red">💬 قوانين الإميتة (/me & /do) والصوت</div>
+            <div class="rule-desc">
+                <ul>
+                    <li><b>أمر /me:</b> يستخدم لوصف الأفعال والجروح والحركات التي لا تظهر بالأنيميشن (مثال: <i>/me يسحب محفظة الشخص</i>).</li>
+                    <li><b>أمر /do:</b> يستخدم لتقصي الحقائق والإجابة الصادقة ولا يجوز الكذب فيه نهائياً (مثال: <i>/do هل يوجد أجهزة تتنصت؟</i>).</li>
+                    <li><b>خروج عن الرول بلاي (OOC):</b> يمنع منعاً باتاً التحدث خارج نطاق الشخصية داخل الصوت العام، أي استفسار يكون عبر الديسكورد أو شات OOC فقط.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- قسم المناطق الآمنة -->
         <div class="rule-card">
-            <div class="rule-title">💰 سيناريوهات السرقة</div>
-            <p class="rule-desc">التزام تام بأعداد المعتدين والشرطة المحددة لكل عملية سرقة قبل البدء.</p>
+            <div class="rule-title blue">🛡️ المناطق الآمنة (Safe Zones)</div>
+            <div class="rule-desc">
+                يمنع منعاً باتاً ممارسة أي نشاط إجرامي (خطف، قتل، سرقة، أو تهديد) داخل أو بالقرب من المناطق التالية:
+                <ul>
+                    <li>🔧 <b>الورش ومحطات الصيانة:</b> يُمنع أي اعتداء على الميكانيكيين أو الزبائن داخل الورشة.</li>
+                    <li>🏥 <b>المستشفيات والمراكز الطبية:</b> منطقة علاج وأمان تام للمسؤولين واللاعبين.</li>
+                    <li>Police <b>مراكز الشرطة والمقرات الحكومية:</b> يمنع المشاكل وافتعال الشغب بداخلها.</li>
+                    <li>🏎️ <b>معارض السيارات ومناطق الرسبون العامة:</b> نقاط تواجد اللاعبين الجدد.</li>
+                </ul>
+            </div>
         </div>
 
+        <!-- قوانين السرقة والاشتباكات -->
         <div class="rule-card">
-            <div class="rule-title">🚫 الثغرات والبرامج المساعدة</div>
-            <p class="rule-desc">استخدام الهاك أو الثغرات يؤدي للباند النهائي مباشرة من سيرفر Lion RP.</p>
+            <div class="rule-title blue">🔫 قوانين الخطف والسرقات</div>
+            <div class="rule-desc">
+                <ul>
+                    <li>يجب وجود عدد كافٍ من رجال الشرطة متواجدين في المدينة قبل البدء بأي عملية سرقة كبرى.</li>
+                    <li>يمنع خطف الموظفين في أوقات خدمتهم (مثل الأطباء والميكانيكيين أثناء أدائهم لعملهم).</li>
+                    <li>يمنع طلب مبالغ تعجيزية كفدية أثناء عمليات الخطف.</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="footer">
-            جميع الحقوق محفوظة لسيرفر <strong>LION ROLEPLAY</strong> &copy; 2026
-        </div>
     </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة لسيرفر Lion RP © 2026</p>
+    </footer>
 
 </body>
 </html>
