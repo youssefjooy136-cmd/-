@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEON RP - التقديم</title>
+    <title>تقديم LEON RP</title>
     <style>
+        * { box-sizing: border-box; }
         body {
-            background-color: #0f0f0f;
+            background-color: #0f111a;
             color: #ffffff;
             font-family: Arial, sans-serif;
             display: flex;
@@ -16,147 +17,265 @@
             margin: 0;
             padding: 20px;
         }
-        .form-container {
-            background-color: #181818;
-            border: 2px solid #d4af37;
-            border-radius: 10px;
+        .container {
+            background: rgba(255, 255, 255, 0.05);
             padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             width: 100%;
-            max-width: 450px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            max-width: 480px;
         }
-        h2 {
-            text-align: center;
-            color: #d4af37;
-            margin-bottom: 5px;
-        }
-        p.sub {
-            text-align: center;
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-            color: #d4af37;
-            font-weight: bold;
-        }
+        h2 { text-align: center; margin-bottom: 20px; }
+        .red-text { color: #ff3333; }
+        .blue-text { color: #3388ff; }
+        .form-group { margin-bottom: 15px; text-align: right; }
+        label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #ccc; }
         input, textarea {
             width: 100%;
             padding: 10px;
-            margin-top: 5px;
-            background-color: #252525;
-            border: 1px solid #444;
-            border-radius: 5px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #1a1d29;
             color: #fff;
-            box-sizing: border-box;
+            font-size: 1rem;
+            outline: none;
         }
+        input:focus, textarea:focus { border-color: #3388ff; }
+        
+        .camera-box {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 15px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #3388ff;
+            box-shadow: 0 0 15px rgba(51, 136, 255, 0.4);
+        }
+        video, canvas { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+        canvas { display: none; }
+        
+        #instruction {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+
+        .previews {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 10px 0;
+        }
+        .previews img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            object-fit: cover;
+        }
+
         button {
             width: 100%;
             padding: 12px;
-            margin-top: 25px;
-            background-color: #1e7e34;
-            color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
+            margin-top: 10px;
+            background: linear-gradient(45deg, #ff3333, #3388ff);
         }
-        button:disabled {
-            background-color: #555;
+        button:hover { opacity: 0.9; }
+
+        #result-box {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
         }
+        .rejected { background-color: rgba(255, 51, 51, 0.2); border: 1px solid #ff3333; color: #ff9999; }
+        .accepted { background-color: rgba(51, 255, 136, 0.2); border: 1px solid #33ff88; color: #99ffbb; }
     </style>
 </head>
 <body>
 
-<div class="form-container">
-    <h2>LEON RP - التقديم</h2>
-    <p class="sub">قم بملء البيانات التالية بدقة لتقييم طلبك</p>
+    <div class="container">
+        <h2>استمارة التقديم في <span class="red-text">LEON</span><span class="blue-text">RP</span></h2>
+        
+        <form id="applyForm" onsubmit="submitForm(event)">
+            
+            <div class="form-group">
+                <label>اسمك في الديسكورد:</label>
+                <input type="text" id="discordName" placeholder="مثال: user#0000" required>
+            </div>
 
-    <form id="applyForm">
-        <label>الاسم الحقيقي:</label>
-        <input type="text" id="name" required placeholder="أدخل اسمك الحقيقي">
+            <div class="form-group">
+                <label>اسم الشخصية في اللعبة:</label>
+                <input type="text" id="characterName" placeholder="مثال: John_Leon" required>
+            </div>
 
-        <label>العمر:</label>
-        <input type="number" id="age" required placeholder="أدخل عمرك">
+            <div class="form-group">
+                <label>العمر:</label>
+                <input type="number" id="age" placeholder="اكتب عمرك الحقيقي" required>
+            </div>
 
-        <label>اسمك في ديسكورد (Discord Username):</label>
-        <input type="text" id="discord" required placeholder="مثال: user_123">
+            <div class="form-group">
+                <label>لماذا انضممت إلينا؟</label>
+                <textarea id="whyJoin" rows="2" placeholder="لماذا اخترت سيرفر LEON RP؟" required></textarea>
+            </div>
 
-        <label>اسم الشخصية داخل اللعبة (In-Game Character Name):</label>
-        <input type="text" id="ingameName" required placeholder="مثال: Jack Spencer">
+            <div class="form-group">
+                <label>قصة الشخصية:</label>
+                <textarea id="story" rows="3" placeholder="اكتب قصة شخصيتك بالتفصيل..." required></textarea>
+            </div>
 
-        <label>قصة الشخصية (Backstory):</label>
-        <textarea id="story" rows="4" required placeholder="اكتب قصة شخصيتك باختصار..."></textarea>
+            <div class="form-group">
+                <label>التحقق بالصور (التقاط 4 زوايا للوجه):</label>
+                <div id="instruction">1. انظر إلى الأمام واضغط التقاط</div>
+                
+                <div class="camera-box">
+                    <video id="video" autoplay playsinline></video>
+                    <canvas id="canvas"></canvas>
+                </div>
 
-        <label>لماذا انضممت إلينا؟</label>
-        <textarea id="reason" rows="3" required placeholder="سبب انضمامك للسيرفر..."></textarea>
+                <button type="button" id="snapBtn" onclick="takeStepPhoto()">التقاط الصورة</button>
+                <div class="previews" id="previewContainer"></div>
+            </div>
 
-        <button type="submit" id="submitBtn">إرسال الطلب</button>
-    </form>
-</div>
+            <div class="form-group">
+                <label>خبرتك في الـ Roleplay:</label>
+                <textarea id="experience" rows="2" placeholder="اشرح خبرتك السابقة..." required></textarea>
+            </div>
 
-<script>
-    const form = document.getElementById('applyForm');
-    const submitBtn = document.getElementById('submitBtn');
+            <button type="submit" id="submitBtn" style="display:none;">إرسال التقديم</button>
+        </form>
 
-    // رابط الـ Webhook الخاص بك
-    const webhookUrl = "https://discord.com/api/webhooks/1534030878575951933/-OMrFp-xu01ZeWKVXFNLbLM8YqXPz6Hls4Eshs5mFM7WiIqPhFuZQrdUPQfsypfZA-jG";
+        <div id="result-box">
+            <h3 id="result-title"></h3>
+            <p id="result-desc"></p>
+        </div>
+    </div>
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const instruction = document.getElementById('instruction');
+        const snapBtn = document.getElementById('snapBtn');
+        const previewContainer = document.getElementById('previewContainer');
+        const submitBtn = document.getElementById('submitBtn');
+        const applyForm = document.getElementById('applyForm');
+        const resultBox = document.getElementById('result-box');
+        const resultTitle = document.getElementById('result-title');
+        const resultDesc = document.getElementById('result-desc');
 
-        submitBtn.disabled = true;
-        submitBtn.innerText = "جاري الإرسال...";
+        let step = 0;
+        const stepsText = [
+            "2. التفت برأسك إلى (اليمين)",
+            "3. التفت برأسك إلى (الشمال)",
+            "4. ارفع رأسك إلى (فوق)",
+            "تم التقاط الصور بنجاح! جاهز للإرسال."
+        ];
+        const capturedPhotos = [];
 
-        const name = document.getElementById('name').value;
-        const age = document.getElementById('age').value;
-        const discord = document.getElementById('discord').value;
-        const ingameName = document.getElementById('ingameName').value;
-        const story = document.getElementById('story').value;
-        const reason = document.getElementById('reason').value;
+        // تشغيل الكاميرا الآمن
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+                .then(stream => { video.srcObject = stream; })
+                .catch(err => { console.log("الكاميرا تحتاج إذن أو متصفح آمن"); });
+        }
 
-        const payload = {
-            embeds: [{
-                title: "📝 طلب تقديم جديد - LEON RP",
-                color: 13808727,
-                fields: [
-                    { name: "الاسم الحقيقي", value: name, inline: true },
-                    { name: "العمر", value: age, inline: true },
-                    { name: "حساب الديسكورد", value: discord, inline: false },
-                    { name: "اسم الشخصية باللعبة", value: ingameName, inline: false },
-                    { name: "قصة الشخصية (Backstory)", value: story, inline: false },
-                    { name: "سبب الانضمام", value: reason, inline: false }
-                ],
-                footer: { text: "نظام التقديم الآلي" },
-                timestamp: new Date()
-            }]
-        };
+        function takeStepPhoto() {
+            if (step >= 4) return;
 
-        fetch(webhookUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        })
-        .then(response => {
-            if (response.ok) {
-                alert("تم إرسال طلبك بنجاح! ✅");
-                form.reset();
+            const ctx = canvas.getContext('2d');
+            canvas.width = video.videoWidth || 300;
+            canvas.height = video.videoHeight || 300;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const imgData = canvas.toDataURL('image/png');
+            capturedPhotos.push(imgData);
+
+            const thumb = document.createElement('img');
+            thumb.src = imgData;
+            previewContainer.appendChild(thumb);
+
+            step++;
+
+            if (step < 4) {
+                instruction.innerText = stepsText[step - 1];
             } else {
-                alert("حدث خطأ أثناء الإرسال، تأكد من صحة الرابط أو حاول لاحقاً. ❌");
+                instruction.innerText = stepsText[3];
+                snapBtn.style.display = 'none'; 
+                submitBtn.style.display = 'block'; 
             }
-        })
-        .catch(error => {
-            alert("حدث خطأ في الاتصال! ❌");
-        })
-        .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.innerText = "إرسال الطلب";
-        });
-    });
-</script>
+        }
 
+        async function submitForm(e) {
+            e.preventDefault();
+            if(capturedPhotos.length < 4) {
+                alert("يجب التقاط الصور الأربعة أولاً!");
+                return;
+            }
+
+            const discordName = document.getElementById('discordName').value;
+            const characterName = document.getElementById('characterName').value;
+            const age = document.getElementById('age').value;
+            const whyJoin = document.getElementById('whyJoin').value;
+            const story = document.getElementById('story').value;
+            const experience = document.getElementById('experience').value;
+
+            let isRejected = false;
+            let rejectReason = "";
+
+            if (story.split(' ').length < 10) {
+                isRejected = true;
+                rejectReason = "تم رفض التقديم لأن قصة الشخصية قصيرة جداً.";
+            } else if (age < 16) {
+                isRejected = true;
+                rejectReason = "تم رفض التقديم لأن العمر لا يتوافق مع شروط السيرفر.";
+            }
+
+            const webhookURL = 'https://discord.com/api/webhooks/1541524451534053396/9JSljtAgEv349JTM-IN-8BX_6HxfI_WztkLtr0e79HA0CV9FsvQFOukX7_wIGcAA_D8A';
+
+            const message = {
+                content: `🔔 **طلب تقديم جديد في LEON RP**\n` +
+                         `👤 **ديسكورد:** ${discordName}\n` +
+                         `🎭 **الشخصية:** ${characterName}\n` +
+                         `🎂 **العمر:** ${age}\n` +
+                         `❓ **السبب:** ${whyJoin}\n` +
+                         `📜 **القصة:** ${story}\n` +
+                         `⭐ **الخبرة:** ${experience}\n` +
+                         `📊 **الحالة:** ${isRejected ? '❌ مرفوض (' + rejectReason + ')' : '✅ مقبول مبدئياً'}`
+            };
+
+            try {
+                await fetch(webhookURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(message)
+                });
+            } catch (error) {
+                console.error(error);
+            }
+
+            applyForm.style.display = 'none';
+            resultBox.style.display = 'block';
+
+            if (isRejected) {
+                resultBox.className = "rejected";
+                resultTitle.innerText = "❌ تم رفض طلبك!";
+                resultDesc.innerText = rejectReason;
+            } else {
+                resultBox.className = "accepted";
+                resultTitle.innerText = "✅ تم قبول طلبك مبدئياً!";
+                resultDesc.innerText = "تم إرسال بياناتك للإدارة بنجاح.";
+            }
+        }
+    </script>
 </body>
 </html>
