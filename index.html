@@ -3,279 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تقديم LEON RP</title>
+    <title>LEON RP</title>
     <style>
-        * { box-sizing: border-box; }
-        body {
-            background-color: #0f111a;
-            color: #ffffff;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+        /* زرار تفاعلي لضمان تشغيل الصوت في فايف إم */
+        #play-btn {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-            max-width: 480px;
-        }
-        h2 { text-align: center; margin-bottom: 20px; }
-        .red-text { color: #ff3333; }
-        .blue-text { color: #3388ff; }
-        .form-group { margin-bottom: 15px; text-align: right; }
-        label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #ccc; }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background-color: #1a1d29;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-        }
-        input:focus, textarea:focus { border-color: #3388ff; }
-        
-        .camera-box {
-            position: relative;
-            width: 180px;
-            height: 180px;
-            margin: 15px auto;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid #3388ff;
-            box-shadow: 0 0 15px rgba(51, 136, 255, 0.4);
-        }
-        video, canvas { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
-        canvas { display: none; }
-        
-        #instruction {
-            text-align: center;
-            font-size: 0.9rem;
-            color: #ffcc00;
-            margin-bottom: 10px;
-        }
-
-        .previews {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 10px 0;
-        }
-        .previews img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-            object-fit: cover;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
+            z-index: 9999;
             cursor: pointer;
-            margin-top: 10px;
-            background: linear-gradient(45deg, #ff3333, #3388ff);
         }
-        button:hover { opacity: 0.9; }
-
-        #result-box {
-            display: none;
+        .btn-box {
+            color: white;
+            border: 2px solid white;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
             text-align: center;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 15px;
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            transition: 0.3s;
         }
-        .rejected { background-color: rgba(255, 51, 51, 0.2); border: 1px solid #ff3333; color: #ff9999; }
-        .accepted { background-color: rgba(51, 255, 136, 0.2); border: 1px solid #33ff88; color: #99ffbb; }
+        .btn-box:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .loading-container {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 75%;
+            max-width: 300px;
+            text-align: center;
+            z-index: 3;
+        }
+        .progress-bar-box {
+            width: 100%;
+            height: 5px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 3px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        #progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #ffffff;
+            transition: width 0.2s ease;
+        }
+        .loading-text {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2>استمارة التقديم في <span class="red-text">LEON</span><span class="blue-text">RP</span></h2>
-        
-        <form id="applyForm" onsubmit="submitForm(event)">
-            
-            <div class="form-group">
-                <label>اسمك في الديسكورد:</label>
-                <input type="text" id="discordName" placeholder="مثال: user#0000" required>
-            </div>
+    <video autoplay loop playsinline id="bg-video">
+        <source src="intro.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
-            <div class="form-group">
-                <label>اسم الشخصية في اللعبة:</label>
-                <input type="text" id="characterName" placeholder="مثال: John_Leon" required>
-            </div>
+    <div class="overlay"></div>
 
-            <div class="form-group">
-                <label>العمر:</label>
-                <input type="number" id="age" placeholder="اكتب عمرك الحقيقي" required>
-            </div>
+    <!-- زرار التشغيل الإجباري للصوت -->
+    <div id="play-btn" onclick="startAudio()">
+        <div class="btn-box">اضغط هنا لدخول سيرفر LEON RP 🎬</div>
+    </div>
 
-            <div class="form-group">
-                <label>لماذا انضممت إلينا؟</label>
-                <textarea id="whyJoin" rows="2" placeholder="لماذا اخترت سيرفر LEON RP؟" required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>قصة الشخصية:</label>
-                <textarea id="story" rows="3" placeholder="اكتب قصة شخصيتك بالتفصيل..." required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>التحقق بالصور (التقاط 4 زوايا للوجه):</label>
-                <div id="instruction">1. انظر إلى الأمام واضغط التقاط</div>
-                
-                <div class="camera-box">
-                    <video id="video" autoplay playsinline></video>
-                    <canvas id="canvas"></canvas>
-                </div>
-
-                <button type="button" id="snapBtn" onclick="takeStepPhoto()">التقاط الصورة</button>
-                <div class="previews" id="previewContainer"></div>
-            </div>
-
-            <div class="form-group">
-                <label>خبرتك في الـ Roleplay:</label>
-                <textarea id="experience" rows="2" placeholder="اشرح خبرتك السابقة..." required></textarea>
-            </div>
-
-            <button type="submit" id="submitBtn" style="display:none;">إرسال التقديم</button>
-        </form>
-
-        <div id="result-box">
-            <h3 id="result-title"></h3>
-            <p id="result-desc"></p>
+    <div class="loading-container">
+        <div class="progress-bar-box">
+            <div id="progress-fill"></div>
         </div>
+        <div class="loading-text" id="loading-txt">جاري تحميل ملفات السيرفر...</div>
     </div>
 
     <script>
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const instruction = document.getElementById('instruction');
-        const snapBtn = document.getElementById('snapBtn');
-        const previewContainer = document.getElementById('previewContainer');
-        const submitBtn = document.getElementById('submitBtn');
-        const applyForm = document.getElementById('applyForm');
-        const resultBox = document.getElementById('result-box');
-        const resultTitle = document.getElementById('result-title');
-        const resultDesc = document.getElementById('result-desc');
-
-        let step = 0;
-        const stepsText = [
-            "2. التفت برأسك إلى (اليمين)",
-            "3. التفت برأسك إلى (الشمال)",
-            "4. ارفع رأسك إلى (فوق)",
-            "تم التقاط الصور بنجاح! جاهز للإرسال."
-        ];
-        const capturedPhotos = [];
-
-        // تشغيل الكاميرا الآمن
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
-                .then(stream => { video.srcObject = stream; })
-                .catch(err => { console.log("الكاميرا تحتاج إذن أو متصفح آمن"); });
+        function startAudio() {
+            var video = document.getElementById('bg-video');
+            video.muted = false;
+            video.volume = 1.0;
+            video.play();
+            document.getElementById('play-btn').style.display = 'none';
         }
 
-        function takeStepPhoto() {
-            if (step >= 4) return;
-
-            const ctx = canvas.getContext('2d');
-            canvas.width = video.videoWidth || 300;
-            canvas.height = video.videoHeight || 300;
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            const imgData = canvas.toDataURL('image/png');
-            capturedPhotos.push(imgData);
-
-            const thumb = document.createElement('img');
-            thumb.src = imgData;
-            previewContainer.appendChild(thumb);
-
-            step++;
-
-            if (step < 4) {
-                instruction.innerText = stepsText[step - 1];
-            } else {
-                instruction.innerText = stepsText[3];
-                snapBtn.style.display = 'none'; 
-                submitBtn.style.display = 'block'; 
+        // ربط نسبة التحميل الحقيقية للعبة
+        window.addEventListener('message', function(e) {
+            var data = e.data;
+            if (data.eventName === 'loadProgress') {
+                var percentage = Math.round(data.loadFraction * 100);
+                document.getElementById('progress-fill').style.width = percentage + '%';
+                document.getElementById('loading-txt').innerText = 'جاري التحميل... ' + percentage + '%';
             }
-        }
-
-        async function submitForm(e) {
-            e.preventDefault();
-            if(capturedPhotos.length < 4) {
-                alert("يجب التقاط الصور الأربعة أولاً!");
-                return;
-            }
-
-            const discordName = document.getElementById('discordName').value;
-            const characterName = document.getElementById('characterName').value;
-            const age = document.getElementById('age').value;
-            const whyJoin = document.getElementById('whyJoin').value;
-            const story = document.getElementById('story').value;
-            const experience = document.getElementById('experience').value;
-
-            let isRejected = false;
-            let rejectReason = "";
-
-            if (story.split(' ').length < 10) {
-                isRejected = true;
-                rejectReason = "تم رفض التقديم لأن قصة الشخصية قصيرة جداً.";
-            } else if (age < 16) {
-                isRejected = true;
-                rejectReason = "تم رفض التقديم لأن العمر لا يتوافق مع شروط السيرفر.";
-            }
-
-            const webhookURL = 'https://discord.com/api/webhooks/1541524451534053396/9JSljtAgEv349JTM-IN-8BX_6HxfI_WztkLtr0e79HA0CV9FsvQFOukX7_wIGcAA_D8A';
-
-            const message = {
-                content: `🔔 **طلب تقديم جديد في LEON RP**\n` +
-                         `👤 **ديسكورد:** ${discordName}\n` +
-                         `🎭 **الشخصية:** ${characterName}\n` +
-                         `🎂 **العمر:** ${age}\n` +
-                         `❓ **السبب:** ${whyJoin}\n` +
-                         `📜 **القصة:** ${story}\n` +
-                         `⭐ **الخبرة:** ${experience}\n` +
-                         `📊 **الحالة:** ${isRejected ? '❌ مرفوض (' + rejectReason + ')' : '✅ مقبول مبدئياً'}`
-            };
-
-            try {
-                await fetch(webhookURL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(message)
-                });
-            } catch (error) {
-                console.error(error);
-            }
-
-            applyForm.style.display = 'none';
-            resultBox.style.display = 'block';
-
-            if (isRejected) {
-                resultBox.className = "rejected";
-                resultTitle.innerText = "❌ تم رفض طلبك!";
-                resultDesc.innerText = rejectReason;
-            } else {
-                resultBox.className = "accepted";
-                resultTitle.innerText = "✅ تم قبول طلبك مبدئياً!";
-                resultDesc.innerText = "تم إرسال بياناتك للإدارة بنجاح.";
-            }
-        }
+        });
     </script>
+
 </body>
 </html>
+
